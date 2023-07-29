@@ -9,7 +9,7 @@ import CustomerReview from "./Homepage/CustomerReview";
 import FilterList from "./Products/FilterList";
 import ProductsList from "./ProductsList";
 import ProductCard from "./Cart/ProductCard";
-import AmountBtn from "./amountBtn";
+import AmountBtn from "./AmountBtn";
 import CartItem from "./Cart/CartItem";
 import Sort from "./Products/Sort";
 import SubNavbar from "./SubNavbar";
