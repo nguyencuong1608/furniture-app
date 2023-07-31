@@ -1,27 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchAllProducts } from "../axios/axios";
-const products_url = "https://course-api.com/react-store-products";
 
 export const getAllProducts = createAsyncThunk(
   "allproducts/getAllProducts",
-  () => {
-    return fetch(products_url)
-      .then((resp) => {
-        return resp.json();
-      })
-      .catch((err) => {
-        console.log(err);
-        return err;
-      });
-  }
+  () => fetchAllProducts()
 );
-
-// export const getAllProducts = createAsyncThunk(
-//   "allproducts/getAllProducts",
-//   () => {
-//     return fetchAllProducts();
-//   }
-// );
 
 const initialState = {
   allProducts: [],
@@ -49,9 +32,8 @@ export const allProductsSlice = createSlice({
       })
       .addCase(getAllProducts.rejected, (state, action) => {
         state.isLoading = false;
-        console.log(action.payload);
-        // state.errorMsg = action.payload
-        console.log(1);
+        state.isError = true;
+        state.errorMsg = action.error.message;
       });
   },
 });

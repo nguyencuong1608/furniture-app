@@ -8,11 +8,14 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import img2 from "../assets/hero-image/img15.jpg";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Cart = () => {
   const { products, total_price, total_amount } = useSelector(
     (store) => store.cart
   );
+  const { isAuthenticated } = useAuth0();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -57,10 +60,18 @@ const Cart = () => {
             </div>
             <h4 className="shipping-cart">Shipping $15</h4>
           </div>
-          <div className="total-price align-vertical content-space-between">
-            <h4>TOTAL PRICE</h4>
-            <h4>{total_price ? formatPrice(total_price + 1500) : 0}</h4>
-          </div>
+          {isAuthenticated ? (
+            <div className="total-price align-vertical content-space-between">
+              <h4>TOTAL PRICE</h4>
+              <h4>{total_price ? formatPrice(total_price + 1500) : 0}</h4>
+            </div>
+          ) : (
+            <div className="total-price align-vertical content-space-between">
+              <h4 style={{ textAlign: "center", width: "100%" }}>
+                Login to view total price
+              </h4>
+            </div>
+          )}
         </div>
       </div>
     </Wrapper>

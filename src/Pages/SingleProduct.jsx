@@ -8,10 +8,15 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Loading from "../Components/SingleProduct/Loading";
 import AddToCart from "../Components/SingleProduct/AddToCart";
+import Error from "./Error";
+
 const SingleProduct = () => {
   const dispatch = useDispatch();
 
-  const { product, isLoading } = useSelector((store) => store.singleProduct);
+  const { product, isLoading, isError, errorMsg } = useSelector(
+    (store) => store.singleProduct
+  );
+
   const params = useParams();
   const productId = params.id;
 
@@ -23,6 +28,11 @@ const SingleProduct = () => {
   if (isLoading) {
     return <Loading />;
   }
+
+  if (isError) {
+    return <Error errorMsg={errorMsg} />;
+  }
+
   const {
     category,
     id,

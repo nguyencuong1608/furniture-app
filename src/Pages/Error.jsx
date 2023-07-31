@@ -1,10 +1,15 @@
 import { styled } from "styled-components";
 import { Link } from "react-router-dom";
 
-const Error = () => {
+const Error = ({ errorMsg }) => {
   return (
     <Wrapper>
-      <h1>the specified path does not exist</h1>
+      {errorMsg ? (
+        <h1>{errorMsg}</h1>
+      ) : (
+        <h1>the specified path does not exist</h1>
+      )}
+
       <Link to="/">Go Back</Link>
     </Wrapper>
   );

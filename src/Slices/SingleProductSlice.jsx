@@ -1,19 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-const single_product_url = `https://course-api.com/react-store-single-product?id=`;
+import { fetchSingleProducts } from "../axios/axios";
 
 const initialState = {
   product: {},
   isLoading: true,
   isError: false,
+  errorMsg: "",
 };
 
 export const getSingleProduct = createAsyncThunk("product/getProduct", (id) => {
-  return fetch(`${single_product_url}${id}`)
-    .then((resp) => {
-      return resp.json();
-    })
-    .catch((err) => console.log(error));
+  return fetchSingleProducts(id);
 });
 
 const singleProductSlice = createSlice({
@@ -32,7 +28,7 @@ const singleProductSlice = createSlice({
       .addCase(getSingleProduct.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        console.log(action);
+        state.errorMsg = action.error.message;
       });
   },
 });

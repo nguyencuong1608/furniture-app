@@ -2,8 +2,30 @@ import { styled } from "styled-components";
 import { Sort } from "../Components";
 import img8 from "../assets/hero-image/img20.jpg";
 import { FilterList, ProductsList } from "../Components";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 const Products = () => {
+  const { isError, errorMsg } = useSelector((store) => store.allProducts);
+  if (isError) {
+    return (
+      <Wrapper>
+        <div className="header-img">
+          <img src={img8} alt="" />
+          <h2>Expore Our Products</h2>
+        </div>
+        <div className="products-wrap section-center">
+          <aside className="filter-contents">
+            <FilterList />
+          </aside>
+          <div className="products-content">
+            <h2 className=" " style={{ textAlign: "center" }}>
+              {errorMsg}
+            </h2>
+          </div>
+        </div>
+      </Wrapper>
+    );
+  }
   return (
     <Wrapper>
       <div className="header-img">
@@ -55,7 +77,7 @@ const Wrapper = styled.main`
 
   .products-wrap {
     display: grid;
-    padding: 2rem 2rem 0;
+    padding: 2rem 0.5rem 0;
     grid-template-columns: 1fr;
     gap: 5rem 0;
     .filter-contents {

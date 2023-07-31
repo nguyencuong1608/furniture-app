@@ -12,17 +12,15 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import SubNavbar from "./SubNavbar";
 import { navLinks } from "../utils/data";
-
-// const navLinks = [
-//   { id: 1, text: "home", url: "/" },
-//   { id: 2, text: "products", url: "/products" },
-//   { id: 3, text: "about", url: "/About" },
-// ];
+import { LoginButton, LogoutButton } from "../Components";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
   const { total_amount, products } = useSelector((store) => store.cart);
   const location = useLocation();
   const isHomePage = location.pathname == "/";
+
+  const { user, isAuthenticated, isLoading } = useAuth0();
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -61,6 +59,22 @@ const Navbar = () => {
             <SubNavbar />
           </div>
           <div className="cart-container align-vertical">
+            {isAuthenticated ? (
+              <Link to="/user">
+                <img
+                  src={user?.picture}
+                  alt="user-img"
+                  style={{
+                    borderRadius: "50%",
+                    width: "2rem",
+                    marginRight: "1rem",
+                  }}
+                />
+              </Link>
+            ) : (
+              <LoginButton />
+            )}
+
             <NavLink
               to="/cart"
               className={`${
@@ -94,8 +108,8 @@ const Wrapper = styled.nav`
     .nav-grid {
       height: 5rem;
       width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      justify-content: space-between;
     }
 
     .nav-links {
@@ -171,6 +185,7 @@ const Wrapper = styled.nav`
       }
 
       .nav-grid {
+        display: grid;
         height: 5rem;
         width: 100%;
         display: grid;

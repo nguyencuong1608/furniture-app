@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 :root {
-  /* darkest grey - used for headings */
-  /* --toastify-icon-color-success: transparent; */
   --toastify-toast-background: #f4f4f4;
   --toastify-color-progress-success: transparent;
   --toastify-color-progress-warning: transparent;
@@ -135,7 +133,6 @@ p {
 
 .btn-active {
   padding: 0.25rem 0.5rem !important ;
-  /* background-color: #8da1b6 !important; */
   background-color: #8da1b6 !important;
   color: var(--clr-white) !important;
   transition: all 0.3s ease;
@@ -144,6 +141,9 @@ p {
 .color-active {
   opacity: 1 !important;
   transition: all 0.3s ease;
+}
+.login-active {
+  opacity: 1 !important;
 }
 
 @media screen and (min-width: 992px) {

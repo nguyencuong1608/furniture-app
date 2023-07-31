@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
-import ProductCard from "./Cart/ProductCard";
-import { getFilterProducts } from "../Slices/filterProductSlice";
+import ProductCard from "../Cart/ProductCard";
+import { getFilterProducts } from "../../Slices/filterProductSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
