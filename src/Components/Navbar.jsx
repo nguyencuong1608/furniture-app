@@ -7,7 +7,7 @@ import Cart from "../Pages/Cart";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
-import { totalAmount } from "../Slices/CartSlice";
+import { totalAmount, getCartLocalStorage } from "../Slices/CartSlice";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import SubNavbar from "./SubNavbar";
@@ -19,10 +19,21 @@ const Navbar = () => {
   const { total_amount, products } = useSelector((store) => store.cart);
   const location = useLocation();
   const isHomePage = location.pathname == "/";
-
   const { user, isAuthenticated, isLoading } = useAuth0();
 
   const dispatch = useDispatch();
+
+  const handleUserCart = (user) => {
+    if (user) {
+      dispatch(
+        getCartLocalStorage(JSON.parse(localStorage.getItem(user.email)))
+      );
+    }
+  };
+  useEffect(() => {
+    handleUserCart(user);
+  }, [user]);
+
   useEffect(() => {
     dispatch(totalAmount());
   }, [total_amount, products]);

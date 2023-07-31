@@ -19,6 +19,7 @@ function App() {
     (store) => store.allProducts
   );
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getAllProducts());
   }, []);
@@ -51,8 +52,8 @@ function App() {
           position="bottom-right"
           toastStyle={{
             backgroundColor: "f4f4f4",
-            boxShadow:
-              "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;",
+            // boxShadow:
+            //   "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;",
           }}
         />
       </Auth0Provider>

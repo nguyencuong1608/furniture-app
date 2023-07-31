@@ -9,12 +9,21 @@ import { LogoutButton } from "../Components";
 const User = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return (
+      <div
+        style={{ width: "auto", height: "90vh" }}
+        className="align-items justify-content"
+      >
+        <h2 style={{ alignSelf: "center" }}>Loading ...</h2>
+      </div>
+    );
   }
   return (
     <Wrapper>
       <div className="user-container">
-        <img src={img} alt="" />
+        <div className="sub-img">
+          <img src={img} alt="" />
+        </div>
         <div className="user-content">
           <div className="img-wrapper">
             <img src={img2} alt="" />
@@ -44,15 +53,18 @@ const Wrapper = styled.section`
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
   .user-container {
     margin: auto;
-    width: 80vw;
+    width: 95vw;
     max-width: 70rem;
     height: 40rem;
     background-color: #ffffffc1;
     border-radius: var(--border-radius);
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     overflow: hidden;
     backdrop-filter: blur(10px);
+  }
+  .sub-img {
+    display: none;
   }
   img {
     width: 100%;
@@ -94,6 +106,16 @@ const Wrapper = styled.section`
     object-fit: cover;
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
       rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  }
+  @media screen and (min-width: 1024px) {
+    .user-container {
+      grid-template-columns: 1fr 1fr;
+      width: 80vw;
+      max-width: 70rem;
+    }
+    .sub-img {
+      display: block;
+    }
   }
 `;
 

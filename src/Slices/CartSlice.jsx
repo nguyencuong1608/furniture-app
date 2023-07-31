@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 const initialState = {
   products: [],
   total_amount: 0,
@@ -11,6 +12,11 @@ const CartSlice = createSlice({
   name: "cartSlice",
   initialState,
   reducers: {
+    getCartLocalStorage: (state, action) => {
+      if (action.payload) {
+        state.products = [...action.payload];
+      }
+    },
     addCartItem: (state, action) => {
       const { id, amount, images, productColor, price, stock, name } =
         action.payload;
@@ -83,6 +89,7 @@ export const {
   removeItem,
   totalAmount,
   totalPrice,
+  getCartLocalStorage,
 } = CartSlice.actions;
 
 // getCartitem:

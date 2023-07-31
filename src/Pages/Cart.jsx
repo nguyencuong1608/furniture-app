@@ -2,7 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { styled } from "styled-components";
 import { CartItem } from "../Components";
 import { useEffect } from "react";
-import { totalAmount, totalPrice } from "../Slices/CartSlice";
+import {
+  totalAmount,
+  totalPrice,
+  getCartLocalStorage,
+} from "../Slices/CartSlice";
 import { formatPrice } from "../utils/helper";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,16 +18,26 @@ const Cart = () => {
   const { products, total_price, total_amount } = useSelector(
     (store) => store.cart
   );
-  const { isAuthenticated } = useAuth0();
-
+  const { isAuthenticated, user } = useAuth0();
   const dispatch = useDispatch();
+
+  const handleUserCart = (user) => {
+    if (user) {
+      dispatch(
+        getCartLocalStorage(JSON.parse(localStorage.getItem(user.email)))
+      );
+    }
+  };
+
+  useEffect(() => {
+    handleUserCart(user);
+  }, [user]);
 
   useEffect(() => {
     dispatch(totalAmount());
     dispatch(totalPrice());
   }, [products]);
 
-  // console.log(products);
   return (
     <Wrapper>
       <div className="cart-container">
@@ -83,7 +97,7 @@ const Wrapper = styled.section`
   min-height: 95vh;
   .cart-container {
     margin: -5rem auto 0;
-    width: 98vw;
+    width: 95vw;
     padding: 10rem 0 14rem 0;
     min-height: 60vh;
     border-radius: 1rem;
@@ -92,10 +106,11 @@ const Wrapper = styled.section`
     overflow: hidden;
   }
   .cart-content {
-    background-color: white;
+    background-color: #f0f0f0ea;
     padding: 3rem 2rem;
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
+    backdrop-filter: blur(8px);
   }
   .price-wrap {
     margin-top: 1rem;
@@ -107,7 +122,8 @@ const Wrapper = styled.section`
       padding-left: 0.5rem;
     }
     &:hover {
-      opacity: 0.6;
+      color: var(--clr-red);
+      opacity: 1;
     }
   }
   .cart-items {
@@ -166,7 +182,6 @@ const Wrapper = styled.section`
       grid-template-columns: 66.67% 33.33%;
     }
     .cart-content {
-      background-color: white;
       padding: 3rem 6rem;
       border-top-left-radius: 1rem;
       border-top-right-radius: 0;
@@ -188,7 +203,6 @@ const Wrapper = styled.section`
       grid-template-columns: 66.67% 33.33%;
     }
     .cart-content {
-      background-color: white;
       padding: 3rem 4rem;
       border-top-left-radius: 1rem;
       border-top-right-radius: 0;

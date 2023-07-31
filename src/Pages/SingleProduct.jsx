@@ -9,13 +9,21 @@ import "react-loading-skeleton/dist/skeleton.css";
 import Loading from "../Components/SingleProduct/Loading";
 import AddToCart from "../Components/SingleProduct/AddToCart";
 import Error from "./Error";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const SingleProduct = () => {
   const dispatch = useDispatch();
-
+  const { isAuthenticated, user } = useAuth0();
   const { product, isLoading, isError, errorMsg } = useSelector(
     (store) => store.singleProduct
   );
+  const { products } = useSelector((store) => store.cart);
+
+  const setCartsLocalStorage = (user, products) => {
+    if (user) {
+      localStorage.setItem(user.email, JSON.stringify(products));
+    }
+  };
 
   const params = useParams();
   const productId = params.id;
@@ -24,6 +32,10 @@ const SingleProduct = () => {
     window.scrollTo(0, 0);
     dispatch(getSingleProduct(productId));
   }, []);
+
+  useEffect(() => {
+    setCartsLocalStorage(user, products);
+  }, [user, products]);
 
   if (isLoading) {
     return <Loading />;
