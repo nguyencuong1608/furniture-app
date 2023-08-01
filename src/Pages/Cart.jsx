@@ -24,6 +24,10 @@ const Cart = () => {
     dispatch(totalPrice());
   }, [products]);
 
+  useEffect(() => {
+    localStorage.setItem(user.email, JSON.stringify(products));
+  }, [total_amount]);
+
   return (
     <Wrapper
       initial={{ filter: "blur(4px) " }}
@@ -58,6 +62,7 @@ const Cart = () => {
             </Link>
           </div>
         </div>
+        {/* cart sumary */}
         <div className="cart-summary">
           <h2>Summary</h2>
           <hr />
@@ -80,6 +85,7 @@ const Cart = () => {
                   className="buy-btn"
                   onClick={() => {
                     dispatch(clearCartItem());
+                    localStorage.setItem(user.email, JSON.stringify([]));
                   }}
                 >
                   Buy
