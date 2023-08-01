@@ -39,17 +39,17 @@ const Wrapper = styled.div`
 
     .hero-content {
       position: absolute;
-      left: 2rem;
-      bottom: 2rem;
+      left: 1rem;
+      bottom: 1rem;
       color: var(--clr-white);
       h1 {
-        font-size: 4rem;
+        font-size: 3rem;
         font-weight: 600;
       }
 
       .hero-title {
         img {
-          width: 16rem;
+          width: 12rem;
         }
       }
       .hero-text {
@@ -69,6 +69,11 @@ const Wrapper = styled.div`
         h1 {
           font-size: 4rem;
           font-weight: 600;
+        }
+        .hero-title {
+          img {
+            width: 16rem;
+          }
         }
       }
     }

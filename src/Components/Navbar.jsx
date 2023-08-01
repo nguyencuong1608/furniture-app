@@ -66,6 +66,8 @@ const Navbar = () => {
               );
             })}
           </ul>
+
+          {/* Sub Nav */}
           <div className="sub-nav">
             <SubNavbar />
           </div>
@@ -85,6 +87,7 @@ const Navbar = () => {
             ) : (
               <LoginButton />
             )}
+            {/* End Sub Nav */}
 
             <NavLink
               to="/cart"

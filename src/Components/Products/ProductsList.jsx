@@ -49,7 +49,6 @@ const ProductsList = () => {
 };
 
 const Wrapper = styled.section`
-  padding: 0 1rem;
   .products-container {
     display: grid;
     grid-template-columns: 1fr;
@@ -57,6 +56,7 @@ const Wrapper = styled.section`
   }
 
   @media screen and (min-width: 992px) {
+    padding: 0 1rem;
     .products-container {
       grid-template-columns: 1fr 1fr;
     }

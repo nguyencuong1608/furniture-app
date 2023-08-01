@@ -32,7 +32,7 @@ const Services = () => {
             {featured_products.slice(3, 6).map((item) => {
               return (
                 <div className="featured-product" key={`key:${item.id}`}>
-                  <Link>
+                  <Link to="./products">
                     <img src={item.image} alt={item.description} />
                   </Link>
                 </div>

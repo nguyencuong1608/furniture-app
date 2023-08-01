@@ -1,13 +1,27 @@
 import { styled } from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
+  const location = useLocation();
 
   return (
     <Wrapper>
-      <button onClick={() => loginWithRedirect()}>Log In</button>
+      <button
+        onClick={() => loginWithRedirect()}
+        style={
+          location.pathname === "/cart"
+            ? {
+                color: "white",
+                backgroundColor: "var(--clr-primary)",
+              }
+            : null
+        }
+      >
+        Log In
+      </button>
     </Wrapper>
   );
 };

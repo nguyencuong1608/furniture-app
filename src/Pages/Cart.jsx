@@ -13,25 +13,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import img2 from "../assets/hero-image/img15.jpg";
 import { useAuth0 } from "@auth0/auth0-react";
+import { LoginButton } from "../Components";
 
 const Cart = () => {
   const { products, total_price, total_amount } = useSelector(
     (store) => store.cart
   );
-  const { isAuthenticated, user } = useAuth0();
   const dispatch = useDispatch();
-
-  const handleUserCart = (user) => {
-    if (user) {
-      dispatch(
-        getCartLocalStorage(JSON.parse(localStorage.getItem(user.email)))
-      );
-    }
-  };
-
-  useEffect(() => {
-    handleUserCart(user);
-  }, [user]);
+  const { isAuthenticated, user } = useAuth0();
 
   useEffect(() => {
     dispatch(totalAmount());
@@ -50,6 +39,7 @@ const Cart = () => {
                 <h2 className="empty-cart-header">YOUR CART IS EMPTY</h2>
               </div>
             ) : (
+              // Cart Item
               <div className="cart-items ">
                 {products.map((product, index) => {
                   return <CartItem key={`id: ${index}`} {...product} />;
@@ -80,10 +70,17 @@ const Cart = () => {
               <h4>{total_price ? formatPrice(total_price + 1500) : 0}</h4>
             </div>
           ) : (
-            <div className="total-price align-vertical content-space-between">
+            <div>
               <h4 style={{ textAlign: "center", width: "100%" }}>
                 Login to view total price
               </h4>
+              <div
+                style={{
+                  textAlign: "center",
+                }}
+              >
+                <LoginButton />
+              </div>
             </div>
           )}
         </div>

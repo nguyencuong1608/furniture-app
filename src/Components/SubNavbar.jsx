@@ -4,20 +4,45 @@ import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { navLinks } from "../utils/data";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { LoginButton } from "../Components";
+import { useSelector } from "react-redux";
 
 const SubNavbar = () => {
   const [isSubNavbarOpen, setIsNavbarOpen] = useState(false);
+  const { user, isAuthenticated } = useAuth0();
+  const { total_amount } = useSelector((store) => store.cart);
 
   return (
     <Wrapper>
       <div className="sub-nav-wrapper">
+        {isAuthenticated ? (
+          <Link to="/user" style={{ float: "left", padding: "0.5rem" }}>
+            <img
+              src={user?.picture}
+              alt="user-img"
+              style={{
+                borderRadius: "50%",
+                width: "2rem",
+                marginRight: "1rem",
+              }}
+            />
+          </Link>
+        ) : (
+          <div
+            className="align-vertical justify-content"
+            style={{ display: "flex" }}
+          >
+            <LoginButton style={{}} />
+          </div>
+        )}
         <button
           onClick={() => {
             setIsNavbarOpen(!isSubNavbarOpen);
           }}
         >
           {isSubNavbarOpen ? (
-            <FontAwesomeIcon icon={faXmark} />
+            <FontAwesomeIcon icon={faXmark} style={{ width: "22.39px" }} />
           ) : (
             <FontAwesomeIcon icon={faBars} />
           )}
@@ -37,7 +62,7 @@ const SubNavbar = () => {
               );
             })}
             <Link to="/cart" onClick={() => setIsNavbarOpen(false)}>
-              Cart
+              Cart {total_amount ? <span>{total_amount}</span> : null}
             </Link>
           </div>
         ) : null}
@@ -53,6 +78,7 @@ const Wrapper = styled.div`
   justify-content: flex-end;
   cursor: pointer;
   .sub-nav-wrapper {
+    display: flex;
   }
   .sub-links {
     position: absolute;
@@ -83,6 +109,13 @@ const Wrapper = styled.div`
     text-transform: uppercase;
     text-align: center;
     font-size: 1rem;
+  }
+  span {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: red;
+    border-radius: 50%;
   }
 `;
 export default SubNavbar;

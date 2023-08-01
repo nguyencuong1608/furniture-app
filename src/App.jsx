@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import SingleProduct from "./Pages/SingleProduct";
 import Cart from "./Pages/Cart";
 import { ToastContainer, toast } from "react-toastify";
-import { Auth0Provider } from "@auth0/auth0-react";
+import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
 
 const domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId = import.meta.env.VITE_AUTH0_DOMAIN_AUTH0_CLIENT_ID;
@@ -19,6 +19,20 @@ function App() {
     (store) => store.allProducts
   );
   const dispatch = useDispatch();
+
+  const { isAuthenticated, user } = useAuth0();
+
+  const handleUserCart = (user) => {
+    if (user) {
+      dispatch(
+        getCartLocalStorage(JSON.parse(localStorage.getItem(user.email)))
+      );
+    }
+  };
+
+  useEffect(() => {
+    handleUserCart(user);
+  }, [user]);
 
   useEffect(() => {
     dispatch(getAllProducts());

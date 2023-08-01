@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { getSingleProduct } from "../Slices/SingleProductSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { styled } from "styled-components";
 import { formatPrice } from "../utils/helper";
 import Skeleton from "react-loading-skeleton";
@@ -88,6 +88,9 @@ const SingleProduct = () => {
               <div className="product-info">
                 <b>Price:</b> <span>{formatPrice(price)}</span>
               </div>
+              <div className="redirect-to-cart">
+                <Link to="/cart"> Go to cart</Link>
+              </div>
             </>
             <div className="add-to-cart">
               {stock ? (
@@ -150,6 +153,12 @@ const Wrapper = styled.section`
     .add-to-cart {
       margin-top: 2rem;
     }
+    .redirect-to-cart {
+      display: block;
+      a {
+        text-decoration: underline;
+      }
+    }
   }
   @media screen and (min-width: 996px) {
     .container {
@@ -164,6 +173,9 @@ const Wrapper = styled.section`
         max-height: 30rem;
         object-fit: cover;
         margin-top: 2rem;
+      }
+      .redirect-to-cart {
+        display: none;
       }
     }
   }
