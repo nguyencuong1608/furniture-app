@@ -25,7 +25,9 @@ const Cart = () => {
   }, [products]);
 
   useEffect(() => {
-    localStorage.setItem(user.email, JSON.stringify(products));
+    if (user) {
+      localStorage.setItem(user.email, JSON.stringify(products));
+    }
   }, [total_amount]);
 
   return (
