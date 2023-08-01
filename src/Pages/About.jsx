@@ -2,10 +2,18 @@ import { styled } from "styled-components";
 import img from "../assets/hero-image/img12.jpg";
 import img2 from "../assets/hero-image/img5.jpg";
 import img3 from "../assets/hero-image/img6.jpg";
+import { AnimatePresence, motion } from "framer-motion";
 
 const About = () => {
   return (
-    <Wrapper>
+    <Wrapper
+      initial={{ filter: "blur(8px) " }}
+      animate={{ filter: "blur(0) " }}
+      exit={{
+        filter: "blur(8px)",
+        transition: { duration: 0.01 },
+      }}
+    >
       <div className="about-wrapper">
         <div className="about-img">
           <img src={img} alt="" />
@@ -88,7 +96,7 @@ const About = () => {
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled(motion.div)`
   height: auto;
   margin-top: -5rem;
   margin-bottom: 5rem;

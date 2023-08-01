@@ -10,6 +10,7 @@ import Loading from "../Components/SingleProduct/Loading";
 import AddToCart from "../Components/SingleProduct/AddToCart";
 import Error from "./Error";
 import { useAuth0 } from "@auth0/auth0-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const SingleProduct = () => {
   const dispatch = useDispatch();
@@ -61,7 +62,14 @@ const SingleProduct = () => {
   const mainImg = images[0].url;
 
   return (
-    <Wrapper>
+    <Wrapper
+      initial={{ filter: "blur(2px) " }}
+      animate={{ filter: "blur(0) " }}
+      exit={{
+        filter: "blur(2px)",
+        transition: { duration: 0.01 },
+      }}
+    >
       <div className=" section section-center">
         <div className="container">
           <div className="img-wrapper">
@@ -106,7 +114,7 @@ const SingleProduct = () => {
   );
 };
 
-const Wrapper = styled.section`
+const Wrapper = styled(motion.section)`
   .container {
     display: grid;
     grid-template-columns: 1fr;

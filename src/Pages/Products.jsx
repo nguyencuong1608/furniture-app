@@ -3,6 +3,7 @@ import { Sort } from "../Components";
 import img8 from "../assets/hero-image/img20.jpg";
 import { FilterList, ProductsList } from "../Components";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Products = () => {
   const { isError, errorMsg } = useSelector((store) => store.allProducts);
@@ -27,7 +28,14 @@ const Products = () => {
     );
   }
   return (
-    <Wrapper>
+    <Wrapper
+      initial={{ filter: "blur(8px) " }}
+      animate={{ filter: "blur(0) " }}
+      exit={{
+        filter: "blur(8px)",
+        transition: { duration: 0.01 },
+      }}
+    >
       <div className="header-img">
         <img src={img8} alt="" />
         <h2>Expore Our Products</h2>
@@ -44,7 +52,8 @@ const Products = () => {
     </Wrapper>
   );
 };
-const Wrapper = styled.main`
+
+const Wrapper = styled(motion.main)`
   position: relative;
   margin-top: -5rem;
   margin-bottom: 10rem;

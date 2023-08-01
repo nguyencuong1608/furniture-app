@@ -5,6 +5,7 @@ import img3 from "../assets/hero-image/img8.jpg";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { LogoutButton } from "../Components";
+import { AnimatePresence, motion } from "framer-motion";
 
 const User = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -19,7 +20,14 @@ const User = () => {
     );
   }
   return (
-    <Wrapper>
+    <Wrapper
+      initial={{ filter: "blur(4px) " }}
+      animate={{ filter: "blur(0) " }}
+      exit={{
+        filter: "blur(4px)",
+        transition: { duration: 0.01 },
+      }}
+    >
       <div className="user-container">
         <div className="sub-img">
           <img src={img} alt="" />
@@ -43,7 +51,7 @@ const User = () => {
   );
 };
 
-const Wrapper = styled.section`
+const Wrapper = styled(motion.section)`
   height: calc(100vh);
   margin-top: -5rem;
   display: flex;

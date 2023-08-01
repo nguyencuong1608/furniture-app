@@ -1,5 +1,10 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import { Navbar, Footer, ScrollUpButton } from "./Components";
 import { Home, About, Products, Error, User } from "./Pages";
 import { getAllProducts } from "./Slices/AllProductsSlice";
@@ -10,6 +15,7 @@ import SingleProduct from "./Pages/SingleProduct";
 import Cart from "./Pages/Cart";
 import { ToastContainer, toast } from "react-toastify";
 import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
+import AnimatedRoutes from "./Components/AnimatedRoutes";
 
 const domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId = import.meta.env.VITE_AUTH0_DOMAIN_AUTH0_CLIENT_ID;
@@ -19,7 +25,6 @@ function App() {
     (store) => store.allProducts
   );
   const dispatch = useDispatch();
-
   const { isAuthenticated, user } = useAuth0();
 
   const handleUserCart = (user) => {
@@ -51,15 +56,7 @@ function App() {
         }}
       >
         <Navbar />
-        <Routes>
-          <Route path="/" exact element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/:id" element={<SingleProduct />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="*" element={<Error />} />
-          <Route path="/user" element={<User />} />
-        </Routes>
+        <AnimatedRoutes />
         <ScrollUpButton />
         <Footer />
         <ToastContainer

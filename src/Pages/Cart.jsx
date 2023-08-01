@@ -14,6 +14,7 @@ import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import img2 from "../assets/hero-image/img15.jpg";
 import { useAuth0 } from "@auth0/auth0-react";
 import { LoginButton } from "../Components";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Cart = () => {
   const { products, total_price, total_amount } = useSelector(
@@ -28,7 +29,14 @@ const Cart = () => {
   }, [products]);
 
   return (
-    <Wrapper>
+    <Wrapper
+      initial={{ filter: "blur(4px) " }}
+      animate={{ filter: "blur(0) " }}
+      exit={{
+        filter: "blur(4px)",
+        transition: { duration: 0.01 },
+      }}
+    >
       <div className="cart-container">
         <div className="cart-content">
           <div className="cart-wrapper">
@@ -89,7 +97,7 @@ const Cart = () => {
   );
 };
 
-const Wrapper = styled.section`
+const Wrapper = styled(motion.section)`
   background-image: url(${img2});
   min-height: 95vh;
   .cart-container {
