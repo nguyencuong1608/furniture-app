@@ -12,7 +12,8 @@ const LoginButton = () => {
       <button
         onClick={() => loginWithRedirect()}
         style={
-          location.pathname === "/cart"
+          location.pathname === "/cart" ||
+          location.pathname.startsWith("/products/")
             ? {
                 color: "white",
                 backgroundColor: "var(--clr-primary)",

@@ -84,7 +84,8 @@ const Wrapper = styled(motion.section)`
     margin-top: 4rem;
   }
   .img-wrapper {
-    display: flex;
+    display: none;
+    /* display: flex; */
     justify-content: center;
     margin-bottom: 4rem;
     img {
@@ -95,6 +96,7 @@ const Wrapper = styled(motion.section)`
   }
   h2 {
     margin-top: 1rem;
+    font-size: 1.5rem;
   }
 
   h4 {
@@ -116,6 +118,12 @@ const Wrapper = styled(motion.section)`
       rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
   }
   @media screen and (min-width: 1024px) {
+    .img-wrapper {
+      display: flex;
+    }
+    h2 {
+      font-size: 2rem;
+    }
     .user-container {
       grid-template-columns: 1fr 1fr;
       width: 80vw;

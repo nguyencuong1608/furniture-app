@@ -2,11 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { styled } from "styled-components";
 import { CartItem } from "../Components";
 import { useEffect } from "react";
-import {
-  totalAmount,
-  totalPrice,
-  getCartLocalStorage,
-} from "../Slices/CartSlice";
+import { totalAmount, totalPrice, clearCartItem } from "../Slices/CartSlice";
 import { formatPrice } from "../utils/helper";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -73,9 +69,22 @@ const Cart = () => {
             <h4 className="shipping-cart">Shipping $15</h4>
           </div>
           {isAuthenticated ? (
-            <div className="total-price align-vertical content-space-between">
-              <h4>TOTAL PRICE</h4>
-              <h4>{total_price ? formatPrice(total_price + 1500) : 0}</h4>
+            <div>
+              <div className="total-price align-vertical content-space-between">
+                <h4>TOTAL PRICE</h4>
+                <h4>{total_price ? formatPrice(total_price + 1500) : 0}</h4>
+              </div>
+              {/* buy btn */}
+              <div className="justify-content">
+                <button
+                  className="buy-btn"
+                  onClick={() => {
+                    dispatch(clearCartItem());
+                  }}
+                >
+                  Buy
+                </button>
+              </div>
             </div>
           ) : (
             <div>
@@ -177,6 +186,24 @@ const Wrapper = styled(motion.section)`
   .total-price {
     padding-top: 0.5rem;
     border-top: 1px solid #bfbec1;
+  }
+  .buy-btn {
+    margin-top: 1rem;
+    padding: 0.75rem 2rem;
+    border-radius: var(--border-radius);
+    border: none;
+    background-color: var(--clr-primary);
+    color: white;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    cursor: pointer;
+    opacity: 0.6;
+    &:hover {
+      opacity: 1;
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+        rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+        rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+    }
   }
   @media screen and (min-width: 1024px) {
     .cart-container {

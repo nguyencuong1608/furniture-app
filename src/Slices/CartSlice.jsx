@@ -49,7 +49,12 @@ const CartSlice = createSlice({
       }
     },
     clearCartItem: (state, action) => {
+      if (state.products.length < 1) {
+        toast.warning("empty cart");
+        return;
+      }
       state.products = [];
+      toast.success("purchased");
     },
     toggleAmount: (state, action) => {
       const { id, value } = action.payload;
@@ -89,6 +94,7 @@ export const {
   removeItem,
   totalAmount,
   totalPrice,
+  clearCartItem,
   getCartLocalStorage,
 } = CartSlice.actions;
 
