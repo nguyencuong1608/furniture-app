@@ -8,10 +8,6 @@ Users can log in or register, add products to their shopping cart, and there are
 ![Furniture-station Demo](./src/assets/demo-website/homePage.png "Home Page Demo")
 ![Furniture-station Demo](./src/assets/demo-website/aboutPage.png "About Page Demo")
 
-## Link Demo
-
-Link Project: https://furniture-station.netlify.app/
-
 ## Prerequisites
 
 Before you begin, ensure you have met the following requirements:
@@ -33,6 +29,10 @@ Windows:
 ```bash
 git clone https://github.com/nguyencuong1608/furniture-app.git
 ```
+
+## About
+
+Link Project: https://furniture-station.netlify.app/
 
 ## Contact
 
