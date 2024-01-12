@@ -1,6 +1,7 @@
 # FURNITURE STATION - An eCommerce Website
 
 Furniture-station is a fully responsive ecommerce website, maximum compatiblities in all mobile devices, built using HTML, CSS, JavaScript and ReactJs.
+Users can add products to their shopping cart, and there are various options for filtering products. The project is built on an available API.
 
 ## Demo
 
